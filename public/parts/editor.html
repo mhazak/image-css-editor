@@ -1,0 +1,64 @@
+<h1>Simple CSS picture web editor</h1>
+<div>
+	
+	<div class="m">
+		<label class="mr10" for="image_file">Select your image</label>
+		<input type="file" name="image_file" id="image_file" accept="image/*">
+	</div>
+	
+	<div class="hidden image_cointainer">
+	
+		<div class="m">
+			<label class="mr10" for="color_picker">Select background color:</label>
+			<input type="color" name="color_picker" id="color_picker" value="transparent">
+		</div>
+
+		<div class="m">
+			<label class="mr10" for="blur_picker">Select blur:</label>
+			<input type="range" name="blur_picker" id="blur_picker" value="0" min="0" max="100">
+		</div>
+
+		<div>
+			<label class="mr10" for="spacing_picker">Select spacing:</label>
+			<input type="range" name="spacing_picker" id="spacing_picker" value="0" min="0" max="100">
+		</div>
+	
+		<img src="#" alt="Your image" id="image">
+	</div>
+</div>
+
+<script>
+	const image_file = document.querySelector('#image_file');
+	const img = document.querySelector('#image');
+	const container = document.querySelector('.image_cointainer');
+	
+	const blur = document.getElementById('blur_picker');
+	const color = document.getElementById('color_picker');
+	const spacing = document.getElementById('spacing_picker');
+
+	const change_style = function(e) {
+		const el = e.target;
+		const value = el.value;
+		const id = e.target?.id;
+
+		// change root style in CSS
+		document.documentElement.style.setProperty(`--${id}`, `${value}${value.includes('#') ? '' : 'px'}`);
+	};
+
+	[blur, color, spacing].forEach(input => {
+		input.addEventListener('change', change_style);
+	});
+	
+	// on upload event
+	image_file.addEventListener('change', function(e) {
+		
+		if (!e.target.files.length)
+			return console.error('No file uploaded!');
+		
+		const file = e.target.files[0];
+		const src = URL.createObjectURL(file);
+		img.src = src;
+		container.classList.remove('hidden');
+	});
+	
+</script>

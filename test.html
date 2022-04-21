@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Test</title>
+</head>
+<body>
+	<input type="file" name="file" id="img_upload">
+
+	<script type="text/javascript">
+		
+		const img_upload = document.getElementById('img_upload');
+		img_upload.addEventListener('change', function (e) {
+			const file = e.target.files[0];
+			const result = URL.createObjectURL(file);
+			console.log({file, result});
+
+		});
+	</script>
+
+</body>
+</html>

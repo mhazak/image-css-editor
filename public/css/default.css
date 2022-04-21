@@ -1,0 +1,25 @@
+/*auto*/
+
+html,body { padding: 0; margin: 0; overflow: hidden; }
+body {
+    background-image: url('https://www.jqueryscript.net/demo/Customizable-Analog-Alarm-Clock-with-jQuery-Canvas-thooClock/img/vignette.png');
+	background-repeat: no-repeat;
+	background-size: 100vw 100vh;
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--color_picker: transparent;
+	--spacing_picker: 0px;
+	--blur_picker: 0px;
+}
+label { font-weight: bold; }
+#image {
+	background-color: var(--color_picker);
+	padding: var(--spacing_picker);
+	filter: blur(var(--blur_picker));
+}

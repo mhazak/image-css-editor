@@ -1,0 +1,66 @@
+@{layout('')}
+@{title(config.name)}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=11" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="robots" content="all,follow" />
+	<link href="//cdn.componentator.com/spa.min@18.css" rel="stylesheet" />
+	<script src="//cdn.componentator.com/spa.min@18.js"></script>
+	@{import('meta', 'head', 'default.js + ui.js', 'default.css + ui.css', 'favicon.ico')}
+</head>
+<body data---="exec" class="invisible">
+
+	<div data---="LAZY directory"></div>
+	<div data---="LAZY menu"></div>
+	<div data---="LAZY approve"></div>
+	<div data---="LAZY datepicker"></div>
+	<div data---="LAZY colorpicker"></div>
+	<div data---="LAZY faicons"></div>
+
+	<div data---="loading" class="hidden"></div>
+
+	<div data-import="url:/parts/editor.html" class="padding"></div>
+
+	<script>
+
+		var common = {};
+
+		CACHEPATH('common.page', '1 week');
+		CACHEPATH('common.darkmode', '1 week');
+
+		ON('ready', function() {
+			var body = $('body');
+			common.darkmode && body.aclass('ui-dark');
+			body.rclass('invisible');
+		});
+
+		ON('@flag showloading', function() {
+			SETTER('loading/show');
+		});
+
+		ON('@flag hideloading', function() {
+			SETTER('loading/hide', 1000);
+		});
+
+		PLUGIN('common', function(exports) {
+
+			exports.page = function(el) {
+				var id = typeof(el) === 'string' ? el : el.attrd('if');
+				SET('?.page', id);
+			};
+
+			exports.darkmode = function() {
+				var el = $('body').tclass('ui-dark');
+				SET('common.darkmode', el.hclass('ui-dark'));
+			};
+
+		});
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+node_modules
+tmp
+*.js.*
+index.pid
+index.js.overload
+package-lock.json
